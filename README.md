@@ -1,6 +1,10 @@
 # Logitech WLED Sync
 
-Windows application that syncs RGB LEDs of Logitech's gaming devices to WLED (https://github.com/Aircoookie/WLED). Currently only solid colours are supported (no effects).
+Windows tray application that syncs RGB LEDs of Logitech's gaming devices to WLED (https://github.com/Aircoookie/WLED). Currently only solid colours are supported (no effects).
+
+## Configuration
+
+Right click on the tray application icon and click "Settings". The rest should be self-explanatory.
 
 
 ## Building Instructions
