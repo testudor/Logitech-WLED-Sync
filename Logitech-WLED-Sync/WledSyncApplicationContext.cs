@@ -23,9 +23,6 @@ namespace Logitech_WLED_Sync
         private int targetR, targetG, targetB;
         private int currentR, currentG, currentB;
 
-
-        private Task udpTask;
-
         public WledSyncApplicationContext()
         {
             settings = new WledSyncAppSettings();
@@ -110,7 +107,7 @@ namespace Logitech_WLED_Sync
             }
         }
 
-        private async void UDPLoop(CancellationToken token)
+        private async Task UDPLoop(CancellationToken token)
         {
             using (UdpClient client = new UdpClient(settings.UDPPort))
             {
@@ -140,6 +137,7 @@ namespace Logitech_WLED_Sync
                             currentR = targetR;
                             currentG = targetG;
                             currentB = targetB;
+
                             LogitechGSDK.LogiLedSetLighting(currentR, currentG, currentB);
                         }
                     }
@@ -171,8 +169,6 @@ namespace Logitech_WLED_Sync
                 time = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - startTime;
 
                 LogitechGSDK.LogiLedSetLighting(currentR, currentG, currentB);
-
-                Console.WriteLine(t);
 
                 await (Task.Delay(1));
             }
