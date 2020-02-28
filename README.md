@@ -5,4 +5,4 @@ Windows application that syncs RGB LEDs of Logitech's gaming devices to WLED (ht
 
 ## Building Instructions
 
-Download the Logitech LED Illumination SDK from [here](https://www.logitechg.com/en-us/innovation/developer-lab.html), move "LogitechLedEnginesWrapper.dll" to the build output folder (where the .exe is), move "LogitechGSDK.cs" to the Projects root folder (where the other .cs files are) and hit "Build"!
+Download the Logitech LED Illumination SDK from [here](https://www.logitechg.com/en-us/innovation/developer-lab.html), move "LogitechLedEnginesWrapper.dll" to the build output folder (where the .exe is), move "LogitechGSDK.cs" to the project's root folder (where the other .cs files are) and hit "Build"!
