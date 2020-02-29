@@ -21,9 +21,9 @@ namespace Logitech_WLED_Sync
         private ColorS currentColor;
         private ColorS startColor;
 
-        float t = 0;
-        long startTime = 0;
-        long time = 0;
+        private float t = 0;
+        private long startTime = 0;
+        private long time = 0;
 
         public WledSyncApplicationContext()
         {
@@ -32,6 +32,7 @@ namespace Logitech_WLED_Sync
             // Initialize Tray Icon
             trayIcon = new NotifyIcon()
             {
+                Text = Resources.APP_NAME,
                 Icon = Resources.IconRunning,
                 ContextMenu = new ContextMenu(new MenuItem[] {
                     new MenuItem(Resources.SETTINGS, EditConfig),

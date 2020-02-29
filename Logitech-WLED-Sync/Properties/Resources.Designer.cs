@@ -61,6 +61,15 @@ namespace Logitech_WLED_Sync.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logitech-WLED-Sync.
+        /// </summary>
+        internal static string APP_NAME {
+            get {
+                return ResourceManager.GetString("APP_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string EXIT {
