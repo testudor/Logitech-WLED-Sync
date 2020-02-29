@@ -60,6 +60,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorS.cs" />
     <Compile Include="WledSyncAppSettings.cs" />
     <Compile Include="ConfigurationForm.cs">
       <SubType>Form</SubType>

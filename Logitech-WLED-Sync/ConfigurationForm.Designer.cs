@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationForm));
             this.StartEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.StartEnabledLabel = new System.Windows.Forms.Label();
             this.UDPPortInput = new System.Windows.Forms.NumericUpDown();
@@ -43,25 +44,27 @@
             // StartEnabledCheckBox
             // 
             this.StartEnabledCheckBox.AutoSize = true;
-            this.StartEnabledCheckBox.Location = new System.Drawing.Point(24, 28);
+            this.StartEnabledCheckBox.Location = new System.Drawing.Point(12, 12);
             this.StartEnabledCheckBox.Name = "StartEnabledCheckBox";
             this.StartEnabledCheckBox.Size = new System.Drawing.Size(136, 21);
             this.StartEnabledCheckBox.TabIndex = 0;
             this.StartEnabledCheckBox.Text = "Enabled on Start";
             this.StartEnabledCheckBox.UseVisualStyleBackColor = true;
+            this.StartEnabledCheckBox.CheckedChanged += new System.EventHandler(this.StartEnabledCheckBox_CheckedChanged);
             // 
             // StartEnabledLabel
             // 
             this.StartEnabledLabel.AutoSize = true;
-            this.StartEnabledLabel.Location = new System.Drawing.Point(146, 61);
+            this.StartEnabledLabel.Location = new System.Drawing.Point(134, 41);
             this.StartEnabledLabel.Name = "StartEnabledLabel";
             this.StartEnabledLabel.Size = new System.Drawing.Size(67, 17);
             this.StartEnabledLabel.TabIndex = 2;
             this.StartEnabledLabel.Text = "UDP Port";
+            this.StartEnabledLabel.Click += new System.EventHandler(this.StartEnabledLabel_Click);
             // 
             // UDPPortInput
             // 
-            this.UDPPortInput.Location = new System.Drawing.Point(24, 56);
+            this.UDPPortInput.Location = new System.Drawing.Point(12, 39);
             this.UDPPortInput.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -70,11 +73,12 @@
             this.UDPPortInput.Name = "UDPPortInput";
             this.UDPPortInput.Size = new System.Drawing.Size(116, 22);
             this.UDPPortInput.TabIndex = 3;
+            this.UDPPortInput.ValueChanged += new System.EventHandler(this.UDPPortInput_ValueChanged);
             // 
             // SaveButton
             // 
             this.SaveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.SaveButton.Location = new System.Drawing.Point(24, 155);
+            this.SaveButton.Location = new System.Drawing.Point(12, 172);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(120, 39);
             this.SaveButton.TabIndex = 5;
@@ -84,7 +88,7 @@
             // CancelButton
             // 
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(172, 155);
+            this.CancelButton.Location = new System.Drawing.Point(190, 172);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(80, 39);
             this.CancelButton.TabIndex = 6;
@@ -94,16 +98,17 @@
             // CrossfadeEnabledCheckBox
             // 
             this.CrossfadeEnabledCheckBox.AutoSize = true;
-            this.CrossfadeEnabledCheckBox.Location = new System.Drawing.Point(24, 84);
+            this.CrossfadeEnabledCheckBox.Location = new System.Drawing.Point(12, 67);
             this.CrossfadeEnabledCheckBox.Name = "CrossfadeEnabledCheckBox";
             this.CrossfadeEnabledCheckBox.Size = new System.Drawing.Size(94, 21);
             this.CrossfadeEnabledCheckBox.TabIndex = 7;
             this.CrossfadeEnabledCheckBox.Text = "Crossfade";
             this.CrossfadeEnabledCheckBox.UseVisualStyleBackColor = true;
+            this.CrossfadeEnabledCheckBox.CheckedChanged += new System.EventHandler(this.CrossfadeEnabledCheckBox_CheckedChanged);
             // 
             // TransitionTimeInput
             // 
-            this.TransitionTimeInput.Location = new System.Drawing.Point(24, 111);
+            this.TransitionTimeInput.Location = new System.Drawing.Point(12, 94);
             this.TransitionTimeInput.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -122,21 +127,23 @@
             0,
             0,
             0});
+            this.TransitionTimeInput.ValueChanged += new System.EventHandler(this.TransitionTimeInput_ValueChanged);
             // 
             // TransitionTimeLabel
             // 
             this.TransitionTimeLabel.AutoSize = true;
-            this.TransitionTimeLabel.Location = new System.Drawing.Point(146, 116);
+            this.TransitionTimeLabel.Location = new System.Drawing.Point(134, 96);
             this.TransitionTimeLabel.Name = "TransitionTimeLabel";
             this.TransitionTimeLabel.Size = new System.Drawing.Size(106, 17);
             this.TransitionTimeLabel.TabIndex = 8;
             this.TransitionTimeLabel.Text = "Transition Time";
+            this.TransitionTimeLabel.Click += new System.EventHandler(this.TransitionTimeLabel_Click);
             // 
             // ConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 216);
+            this.ClientSize = new System.Drawing.Size(282, 223);
             this.Controls.Add(this.TransitionTimeInput);
             this.Controls.Add(this.TransitionTimeLabel);
             this.Controls.Add(this.CrossfadeEnabledCheckBox);
@@ -145,6 +152,9 @@
             this.Controls.Add(this.UDPPortInput);
             this.Controls.Add(this.StartEnabledLabel);
             this.Controls.Add(this.StartEnabledCheckBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(300, 270);
+            this.MinimumSize = new System.Drawing.Size(300, 270);
             this.Name = "ConfigurationForm";
             this.Text = "Configuration";
             this.Load += new System.EventHandler(this.ConfigurationForm_Load);

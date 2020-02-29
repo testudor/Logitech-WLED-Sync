@@ -14,64 +14,51 @@ namespace Logitech_WLED_Sync
     {
         private WledSyncAppSettings settings;
 
-        private int port;
-
         private NotifyIcon trayIcon;
-        private CancellationTokenSource cts;
-        private bool isRunning = true;
+        private bool isRunning;
 
-        private int targetR, targetG, targetB;
-        private int currentR, currentG, currentB;
+        private ColorS targetColor;
+        private ColorS currentColor;
+        private ColorS startColor;
+
+        float t = 0;
+        long startTime = 0;
+        long time = 0;
 
         public WledSyncApplicationContext()
         {
             settings = new WledSyncAppSettings();
 
-            Icon notifyIcon;
-            string changeStateText;
-
-            // Change variables depending on wether sync is enbaled on start or not
-            if (settings.StartEnabled)
-            {
-                notifyIcon = Resources.IconRunning;
-                changeStateText = Resources.PAUSE;
-                isRunning = true;
-            }
-            else
-            {
-                notifyIcon = Resources.IconPaused;
-                changeStateText = Resources.RESUME;
-                isRunning = false;
-            }
-
-            port = settings.UDPPort;
-
             // Initialize Tray Icon
             trayIcon = new NotifyIcon()
             {
-                Icon = notifyIcon,
+                Icon = Resources.IconRunning,
                 ContextMenu = new ContextMenu(new MenuItem[] {
                     new MenuItem(Resources.SETTINGS, EditConfig),
-                    new MenuItem(changeStateText, ChangeState),
+                    new MenuItem(Resources.PAUSE, ChangeState),
                     new MenuItem(Resources.EXIT, Exit),
                 }),
                 Visible = true
             };
 
-            cts = new CancellationTokenSource();
-
-            if (isRunning)
+            if (settings.StartEnabled)
             {
-                LogitechGSDK.LogiLedInit();
+                Activate();
+            }
+            else
+            {
+                Deactivate();
             }
 
-            UDPLoop(cts.Token);
+            _ = UDPLoop();
+            _ = ControlLoop();
+
+            Console.WriteLine("Init finished");
         }
 
         void Exit(object sender, EventArgs e)
         {
             trayIcon.Visible = false;
-            cts.Cancel();
             Application.Exit();
         }
 
@@ -81,6 +68,7 @@ namespace Logitech_WLED_Sync
 
             if (configForm.ShowDialog() == DialogResult.OK)
             {
+                //Config might have changed, restart
                 trayIcon.Visible = false;
                 Application.Restart();
             }
@@ -88,90 +76,98 @@ namespace Logitech_WLED_Sync
 
         void ChangeState(object sender, EventArgs e)
         {
-            isRunning = !isRunning;
-
-            var senderItem = (MenuItem)sender;
-
             if (isRunning)
             {
-                senderItem.Text = Resources.PAUSE;
-                trayIcon.Icon = Resources.IconRunning;
-                LogitechGSDK.LogiLedInit();
-                LogitechGSDK.LogiLedSetLighting(targetR, targetG, targetB);
+                Deactivate();
             }
             else
             {
-                senderItem.Text = Resources.RESUME;
-                trayIcon.Icon = Resources.IconPaused;
-                LogitechGSDK.LogiLedShutdown();
+                Activate();
             }
         }
 
-        private async Task UDPLoop(CancellationToken token)
+        private async Task UDPLoop()
         {
             using (UdpClient client = new UdpClient(settings.UDPPort))
             {
-                while (!token.IsCancellationRequested)
+                while (true)
                 {
+                    // Wait for packet
                     UdpReceiveResult result = await client.ReceiveAsync();
 
                     byte[] data = result.Buffer;
 
-                    int brightness = data[2];
-                    brightness = brightness.Remap(0, 255, 0, 100);
-                    int r = data[3];
-                    targetR = r.Remap(0, 255, 0, brightness);
-                    int g = data[4];
-                    targetG = g.Remap(0, 255, 0, brightness);
-                    int b = data[5];
-                    targetB = b.Remap(0, 255, 0, brightness);
-
-                    if (isRunning)
-                    {
-                        if (settings.CrossfadeEnabled & settings.TransitionTime>0)
-                        {
-                            await FadeToTarget();
-                        }
-                        else
-                        {
-                            currentR = targetR;
-                            currentG = targetG;
-                            currentB = targetB;
-
-                            LogitechGSDK.LogiLedSetLighting(currentR, currentG, currentB);
-                        }
-                    }
+                    // Extract data from UDP packet
+                    targetColor.Br = data[2];
+                    targetColor.R = data[3];
+                    targetColor.G = data[4];
+                    targetColor.B = data[5];
+                    
+                    Console.WriteLine("New Color!");
+                    ResetLerp();                    
                 }
-
-                Console.WriteLine("Cancel");
             }
         }
 
-        private async Task FadeToTarget()
+        private async Task ControlLoop()
         {
-            int startR = currentR;
-            int startG = currentG;
-            int startB = currentB;
-
-            long startTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-
-            long time = 0;
-            float t = 0;
-            while (t < 1)
+            while (true)
             {
-                t = (float)time / settings.TransitionTime;
-                t = t.Clamp(0f, 1f);
+                if (isRunning && currentColor!=targetColor)
+                {
+                    if (settings.CrossfadeEnabled && settings.TransitionTime > 0)
+                    {
+                        if (t < 1)
+                        {                            
+                            t = ((float)time / settings.TransitionTime).Clamp(0f, 1f);
 
-                currentR = startR + (int)Math.Round((targetR - startR) * t);
-                currentG = startG + (int)Math.Round((targetG - startG) * t);
-                currentB = startB + (int)Math.Round((targetB - startB) * t);
+                            // Interpolate between start and target based on t
+                            currentColor = ColorS.Lerp(startColor, targetColor, t);
 
-                time = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - startTime;
+                            time = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - startTime;
 
-                LogitechGSDK.LogiLedSetLighting(currentR, currentG, currentB);
+                            SetColor(currentColor);
+                        }
+                    }
+                    else
+                    {
+                        currentColor = targetColor;
+                        SetColor(currentColor);
+                    }
+                }
 
-                await (Task.Delay(1));
+                await Task.Delay(1);
             }
+        }
+
+        private void SetColor(ColorS color)
+        {
+            LogitechGSDK.LogiLedSetLighting(color.R_100, color.G_100, color.B_100);
+        }
+
+        private void Activate()
+        {
+            isRunning = true;
+            trayIcon.ContextMenu.MenuItems[1].Text = Resources.PAUSE;
+            trayIcon.Icon = Resources.IconRunning;
+            LogitechGSDK.LogiLedInit();
+
+            SetColor(targetColor);
+        }
+        private void Deactivate()
+        {
+            isRunning = false;
+            trayIcon.ContextMenu.MenuItems[1].Text = Resources.RESUME;
+            trayIcon.Icon = Resources.IconPaused;
+            LogitechGSDK.LogiLedShutdown(); ;
+        }
+
+        private void ResetLerp()
+        {
+            t = 0;
+            startColor = currentColor;
+            startTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            time = 0;
         }
     }
 }
