@@ -103,9 +103,9 @@ namespace Logitech_WLED_Sync
                     targetColor.R = data[3];
                     targetColor.G = data[4];
                     targetColor.B = data[5];
-                    
+
                     Console.WriteLine("New Color!");
-                    ResetLerp();                    
+                    ResetLerp();
                 }
             }
         }
@@ -114,12 +114,12 @@ namespace Logitech_WLED_Sync
         {
             while (true)
             {
-                if (isRunning && currentColor!=targetColor)
+                if (isRunning && currentColor != targetColor)
                 {
                     if (settings.CrossfadeEnabled && settings.TransitionTime > 0)
                     {
                         if (t < 1)
-                        {                            
+                        {
                             t = ((float)time / settings.TransitionTime).Clamp(0f, 1f);
 
                             // Interpolate between start and target based on t
@@ -151,7 +151,8 @@ namespace Logitech_WLED_Sync
             isRunning = true;
             trayIcon.ContextMenu.MenuItems[1].Text = Resources.PAUSE;
             trayIcon.Icon = Resources.IconRunning;
-            LogitechGSDK.LogiLedInit();
+
+            LogitechGSDK.LogiLedInitWithName(Resources.APP_NAME);
 
             SetColor(targetColor);
         }
@@ -160,7 +161,7 @@ namespace Logitech_WLED_Sync
             isRunning = false;
             trayIcon.ContextMenu.MenuItems[1].Text = Resources.RESUME;
             trayIcon.Icon = Resources.IconPaused;
-            LogitechGSDK.LogiLedShutdown(); ;
+            LogitechGSDK.LogiLedShutdown();
         }
 
         private void ResetLerp()
