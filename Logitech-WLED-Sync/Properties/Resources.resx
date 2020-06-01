@@ -139,4 +139,7 @@
   <data name="SETTINGS" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SETTINGS_FILE" xml:space="preserve">
+    <value>config.ini</value>
+  </data>
 </root>

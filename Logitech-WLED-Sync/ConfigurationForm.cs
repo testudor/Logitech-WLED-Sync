@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Config.Net;
+using Logitech_WLED_Sync.Properties;
+using System;
 using System.Windows.Forms;
 
 namespace Logitech_WLED_Sync
 {
     public partial class ConfigurationForm : Form
     {
-        WledSyncAppSettings settings;
+        IWledSyncAppSettings settings;
+
         public ConfigurationForm()
         {
             InitializeComponent();
@@ -13,7 +16,7 @@ namespace Logitech_WLED_Sync
 
         private void ConfigurationForm_Load(object sender, EventArgs e)
         {
-            settings = new WledSyncAppSettings();
+            settings = new ConfigurationBuilder<IWledSyncAppSettings>().UseIniFile(Resources.SETTINGS_FILE).Build();
 
             StartEnabledCheckBox.Checked = settings.StartEnabled;
             this.UDPPortInput.Value = settings.UDPPort;
@@ -31,7 +34,6 @@ namespace Logitech_WLED_Sync
             settings.CrossfadeEnabled = this.CrossfadeEnabledCheckBox.Checked;
             settings.TransitionTime = (int)this.TransitionTimeInput.Value;
 
-            settings.Save();
             Console.WriteLine("Save");
         }
         private void CancelButtonClick(object sender, EventArgs e)

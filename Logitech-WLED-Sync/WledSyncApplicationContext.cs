@@ -1,10 +1,8 @@
-﻿using LedCSharp;
+﻿using Config.Net;
+using LedCSharp;
 using Logitech_WLED_Sync.Properties;
 using System;
-using System.Drawing;
 using System.Net.Sockets;
-using System.Reactive.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,7 +10,7 @@ namespace Logitech_WLED_Sync
 {
     internal class WledSyncApplicationContext : ApplicationContext
     {
-        private WledSyncAppSettings settings;
+        private IWledSyncAppSettings settings;
 
         private NotifyIcon trayIcon;
         private bool isRunning;
@@ -27,7 +25,7 @@ namespace Logitech_WLED_Sync
 
         public WledSyncApplicationContext()
         {
-            settings = new WledSyncAppSettings();
+            settings = new ConfigurationBuilder<IWledSyncAppSettings>().UseIniFile(Resources.SETTINGS_FILE).Build();
 
             // Initialize Tray Icon
             trayIcon = new NotifyIcon()
@@ -161,6 +159,7 @@ namespace Logitech_WLED_Sync
             isRunning = false;
             trayIcon.ContextMenu.MenuItems[1].Text = Resources.RESUME;
             trayIcon.Icon = Resources.IconPaused;
+
             LogitechGSDK.LogiLedShutdown();
         }
 
