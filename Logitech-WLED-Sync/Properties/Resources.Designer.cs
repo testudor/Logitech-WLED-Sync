@@ -124,5 +124,14 @@ namespace Logitech_WLED_Sync.Properties {
                 return ResourceManager.GetString("SETTINGS", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to config.ini.
+        /// </summary>
+        internal static string SETTINGS_FILE {
+            get {
+                return ResourceManager.GetString("SETTINGS_FILE", resourceCulture);
+            }
+        }
     }
 }
