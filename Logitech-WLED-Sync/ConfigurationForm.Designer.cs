@@ -1,4 +1,6 @@
-﻿namespace Logitech_WLED_Sync
+﻿using Logitech_WLED_Sync.Properties;
+
+namespace Logitech_WLED_Sync
 {
     partial class ConfigurationForm
     {
@@ -48,9 +50,8 @@
             this.StartEnabledCheckBox.Name = "StartEnabledCheckBox";
             this.StartEnabledCheckBox.Size = new System.Drawing.Size(136, 21);
             this.StartEnabledCheckBox.TabIndex = 0;
-            this.StartEnabledCheckBox.Text = "Enabled on Start";
+            this.StartEnabledCheckBox.Text = Resources.OPTION_START_ENABLED;
             this.StartEnabledCheckBox.UseVisualStyleBackColor = true;
-            this.StartEnabledCheckBox.CheckedChanged += new System.EventHandler(this.StartEnabledCheckBox_CheckedChanged);
             // 
             // StartEnabledLabel
             // 
@@ -59,8 +60,7 @@
             this.StartEnabledLabel.Name = "StartEnabledLabel";
             this.StartEnabledLabel.Size = new System.Drawing.Size(67, 17);
             this.StartEnabledLabel.TabIndex = 2;
-            this.StartEnabledLabel.Text = "UDP Port";
-            this.StartEnabledLabel.Click += new System.EventHandler(this.StartEnabledLabel_Click);
+            this.StartEnabledLabel.Text = Resources.OPTION_UDP_PORT;
             // 
             // UDPPortInput
             // 
@@ -73,7 +73,6 @@
             this.UDPPortInput.Name = "UDPPortInput";
             this.UDPPortInput.Size = new System.Drawing.Size(116, 22);
             this.UDPPortInput.TabIndex = 3;
-            this.UDPPortInput.ValueChanged += new System.EventHandler(this.UDPPortInput_ValueChanged);
             // 
             // SaveButton
             // 
@@ -82,7 +81,7 @@
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(120, 39);
             this.SaveButton.TabIndex = 5;
-            this.SaveButton.Text = "Save && Close";
+            this.SaveButton.Text = Resources.BUTTON_SAVE_CLOSE;
             this.SaveButton.UseVisualStyleBackColor = true;
             // 
             // CancelButton
@@ -92,7 +91,7 @@
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(80, 39);
             this.CancelButton.TabIndex = 6;
-            this.CancelButton.Text = "Cancel";
+            this.CancelButton.Text = Resources.BUTTON_CANCEL;
             this.CancelButton.UseVisualStyleBackColor = true;
             // 
             // CrossfadeEnabledCheckBox
@@ -102,9 +101,8 @@
             this.CrossfadeEnabledCheckBox.Name = "CrossfadeEnabledCheckBox";
             this.CrossfadeEnabledCheckBox.Size = new System.Drawing.Size(94, 21);
             this.CrossfadeEnabledCheckBox.TabIndex = 7;
-            this.CrossfadeEnabledCheckBox.Text = "Crossfade";
+            this.CrossfadeEnabledCheckBox.Text = Resources.OPTION_CROSSFADE;
             this.CrossfadeEnabledCheckBox.UseVisualStyleBackColor = true;
-            this.CrossfadeEnabledCheckBox.CheckedChanged += new System.EventHandler(this.CrossfadeEnabledCheckBox_CheckedChanged);
             // 
             // TransitionTimeInput
             // 
@@ -127,7 +125,6 @@
             0,
             0,
             0});
-            this.TransitionTimeInput.ValueChanged += new System.EventHandler(this.TransitionTimeInput_ValueChanged);
             // 
             // TransitionTimeLabel
             // 
@@ -136,8 +133,7 @@
             this.TransitionTimeLabel.Name = "TransitionTimeLabel";
             this.TransitionTimeLabel.Size = new System.Drawing.Size(106, 17);
             this.TransitionTimeLabel.TabIndex = 8;
-            this.TransitionTimeLabel.Text = "Transition Time";
-            this.TransitionTimeLabel.Click += new System.EventHandler(this.TransitionTimeLabel_Click);
+            this.TransitionTimeLabel.Text = Resources.OPTION_TRANSITION_TIME;
             // 
             // ConfigurationForm
             // 
@@ -156,7 +152,7 @@
             this.MaximumSize = new System.Drawing.Size(300, 270);
             this.MinimumSize = new System.Drawing.Size(300, 270);
             this.Name = "ConfigurationForm";
-            this.Text = "Configuration";
+            this.Text = Resources.WINDOW_CONFIGURATION;
             this.Load += new System.EventHandler(this.ConfigurationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UDPPortInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TransitionTimeInput)).EndInit();

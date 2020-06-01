@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Logitech_WLED_Sync
+﻿namespace Logitech_WLED_Sync
 {
     struct ColorS
     {
@@ -15,7 +9,7 @@ namespace Logitech_WLED_Sync
 
         public int R_100
         {
-            get { return ((int)R).Remap(0, 255, 0, Br_100); }            
+            get { return ((int)R).Remap(0, 255, 0, Br_100); }
         }
         public int G_100
         {

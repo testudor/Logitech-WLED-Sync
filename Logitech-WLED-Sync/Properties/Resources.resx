@@ -120,6 +120,12 @@
   <data name="APP_NAME" xml:space="preserve">
     <value>Logitech WLED Sync</value>
   </data>
+  <data name="BUTTON_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="BUTTON_SAVE_CLOSE" xml:space="preserve">
+    <value>Save &amp; Close</value>
+  </data>
   <data name="EXIT" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -129,6 +135,18 @@
   </data>
   <data name="IconRunning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconRunning.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OPTION_CROSSFADE" xml:space="preserve">
+    <value>Crossfade</value>
+  </data>
+  <data name="OPTION_START_ENABLED" xml:space="preserve">
+    <value>Enabled on Start</value>
+  </data>
+  <data name="OPTION_TRANSITION_TIME" xml:space="preserve">
+    <value>Transition Time</value>
+  </data>
+  <data name="OPTION_UDP_PORT" xml:space="preserve">
+    <value>UDP Port</value>
   </data>
   <data name="PAUSE" xml:space="preserve">
     <value>Pause</value>
@@ -141,5 +159,8 @@
   </data>
   <data name="SETTINGS_FILE" xml:space="preserve">
     <value>config.ini</value>
+  </data>
+  <data name="WINDOW_CONFIGURATION" xml:space="preserve">
+    <value>Configuration</value>
   </data>
 </root>

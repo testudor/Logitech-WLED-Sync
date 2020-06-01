@@ -70,6 +70,24 @@ namespace Logitech_WLED_Sync.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string BUTTON_CANCEL {
+            get {
+                return ResourceManager.GetString("BUTTON_CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save &amp; Close.
+        /// </summary>
+        internal static string BUTTON_SAVE_CLOSE {
+            get {
+                return ResourceManager.GetString("BUTTON_SAVE_CLOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string EXIT {
@@ -95,6 +113,42 @@ namespace Logitech_WLED_Sync.Properties {
             get {
                 object obj = ResourceManager.GetObject("IconRunning", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crossfade.
+        /// </summary>
+        internal static string OPTION_CROSSFADE {
+            get {
+                return ResourceManager.GetString("OPTION_CROSSFADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled on Start.
+        /// </summary>
+        internal static string OPTION_START_ENABLED {
+            get {
+                return ResourceManager.GetString("OPTION_START_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transition Time.
+        /// </summary>
+        internal static string OPTION_TRANSITION_TIME {
+            get {
+                return ResourceManager.GetString("OPTION_TRANSITION_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UDP Port.
+        /// </summary>
+        internal static string OPTION_UDP_PORT {
+            get {
+                return ResourceManager.GetString("OPTION_UDP_PORT", resourceCulture);
             }
         }
         
@@ -131,6 +185,15 @@ namespace Logitech_WLED_Sync.Properties {
         internal static string SETTINGS_FILE {
             get {
                 return ResourceManager.GetString("SETTINGS_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuration.
+        /// </summary>
+        internal static string WINDOW_CONFIGURATION {
+            get {
+                return ResourceManager.GetString("WINDOW_CONFIGURATION", resourceCulture);
             }
         }
     }
