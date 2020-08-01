@@ -36,6 +36,8 @@ namespace Logitech_WLED_Sync
                     new MenuItem(Resources.SETTINGS, EditConfig),
                     new MenuItem(Resources.PAUSE, ChangeState),
                     new MenuItem(Resources.EXIT, Exit),
+                    new MenuItem("-"),
+                    new MenuItem(Resources.APP_NAME+" "+Resources.APP_VERSION),
                 }),
                 Visible = true
             };

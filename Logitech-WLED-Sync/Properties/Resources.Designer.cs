@@ -70,6 +70,15 @@ namespace Logitech_WLED_Sync.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 0.4.
+        /// </summary>
+        internal static string APP_VERSION {
+            get {
+                return ResourceManager.GetString("APP_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string BUTTON_CANCEL {

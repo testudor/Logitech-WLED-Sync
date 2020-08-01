@@ -120,6 +120,9 @@
   <data name="APP_NAME" xml:space="preserve">
     <value>Logitech WLED Sync</value>
   </data>
+  <data name="APP_VERSION" xml:space="preserve">
+    <value>0.4</value>
+  </data>
   <data name="BUTTON_CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
