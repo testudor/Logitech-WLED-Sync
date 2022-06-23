@@ -121,7 +121,7 @@
     <value>Logitech WLED Sync</value>
   </data>
   <data name="APP_VERSION" xml:space="preserve">
-    <value>0.4</value>
+    <value>0.5</value>
   </data>
   <data name="BUTTON_CANCEL" xml:space="preserve">
     <value>Cancel</value>
